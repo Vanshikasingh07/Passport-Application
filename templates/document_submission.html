@@ -1,0 +1,32 @@
+<!-- filepath: /Users/vanshika/Documents/Passport application/templates/document_submission.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Submission - Passport Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Submit Required Documents</h2>
+        <form action="/document_submission" method="POST" enctype="multipart/form-data">
+            <label for="addressProof">Address Proof:</label>
+            <input type="file" id="addressProof" name="addressProof" required>
+            
+            <label for="dobProof">Date of Birth Proof:</label>
+            <input type="file" id="dobProof" name="dobProof" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function fetchFromDigiLocker() {
+            // Implement API call to DigiLocker here
+            alert("Fetching documents from DigiLocker...");
+            // Note: You need to handle the DigiLocker API integration separately
+        }
+    </script>
+</body>
+</html>
