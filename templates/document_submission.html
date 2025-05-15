@@ -1,0 +1,75 @@
+<!-- filepath: /Users/vanshika/Documents/Passport application/templates/document_submission.html -->
+{% extends "base.html" %}
+
+{% block title %}Document Submission - Passport Application{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 800px; margin: 2rem auto;">
+    <h1 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
+        <i class="fas fa-file-upload"></i> Document Submission
+    </h1>
+
+    <div class="alert alert-info" style="background-color: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; margin-bottom: 2rem;">
+        <i class="fas fa-info-circle"></i> Please upload clear, legible copies of your documents. Supported formats: PDF, JPG, PNG (Max size: 5MB)
+    </div>
+
+    <form method="POST" action="{{ url_for('views.document_submission') }}" enctype="multipart/form-data" class="fade-in">
+        <div class="grid">
+            <div class="card">
+                <div class="form-group">
+                    <label for="addressProof">
+                        <i class="fas fa-home"></i> Address Proof *
+                    </label>
+                    <div class="file-input-container">
+                        <label for="addressProof" class="file-input-label">
+                            <i class="fas fa-upload"></i> Choose File
+                        </label>
+                        <input type="file" id="addressProof" name="addressProof" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <span id="addressProofName" style="margin-left: 1rem; color: var(--secondary-color);">No file chosen</span>
+                    </div>
+                    <small style="color: var(--secondary-color); display: block; margin-top: 0.5rem;">
+                        Upload Aadhar Card, Voter ID, or Utility Bill
+                    </small>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="form-group">
+                    <label for="dobProof">
+                        <i class="fas fa-birthday-cake"></i> Date of Birth Proof *
+                    </label>
+                    <div class="file-input-container">
+                        <label for="dobProof" class="file-input-label">
+                            <i class="fas fa-upload"></i> Choose File
+                        </label>
+                        <input type="file" id="dobProof" name="dobProof" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <span id="dobProofName" style="margin-left: 1rem; color: var(--secondary-color);">No file chosen</span>
+                    </div>
+                    <small style="color: var(--secondary-color); display: block; margin-top: 0.5rem;">
+                        Upload Birth Certificate or School Certificate
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button type="submit" class="btn btn-primary" style="min-width: 200px;">
+                <i class="fas fa-check"></i> Submit Application
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Update file names when files are selected
+    document.getElementById('addressProof').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || 'No file chosen';
+        document.getElementById('addressProofName').textContent = fileName;
+    });
+
+    document.getElementById('dobProof').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || 'No file chosen';
+        document.getElementById('dobProofName').textContent = fileName;
+    });
+</script>
+{% endblock %}
