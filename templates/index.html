@@ -1,0 +1,40 @@
+<!-- filepath: /Users/vanshika/Documents/Passport application/templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}Welcome - Passport Application System{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center; max-width: 800px; margin: 4rem auto;">
+    <h1 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;">
+        <i class="fas fa-passport"></i> Welcome to Passport Application System
+    </h1>
+    
+    <p style="font-size: 1.2rem; color: var(--secondary-color); margin-bottom: 2rem;">
+        Apply for your passport online with our easy-to-use application system.
+    </p>
+
+    <div class="grid" style="margin-top: 3rem;">
+        <div class="card">
+            <i class="fas fa-user-edit" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h2 style="margin-bottom: 1rem;">Basic Information</h2>
+            <p style="color: var(--secondary-color); margin-bottom: 1.5rem;">
+                Start your application by providing your basic personal information.
+            </p>
+            <a href="{{ url_for('views.basic_info') }}" class="btn btn-primary">
+                Start Application
+            </a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-file-alt" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h2 style="margin-bottom: 1rem;">View Applications</h2>
+            <p style="color: var(--secondary-color); margin-bottom: 1.5rem;">
+                View and manage your submitted passport applications.
+            </p>
+            <a href="{{ url_for('views.view_basic_info') }}" class="btn btn-secondary">
+                View Applications
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
