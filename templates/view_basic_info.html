@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}View Applications - Passport Application{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 1200px; margin: 2rem auto;">
+    <h1 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
+        <i class="fas fa-file-alt"></i> Passport Applications
+    </h1>
+
+    {% if info %}
+        <div class="grid">
+            {% for application in info %}
+                <div class="info-card fade-in">
+                    <h3>
+                        <i class="fas fa-user"></i> 
+                        {{ application.first_name }} {{ application.middle_name or '' }} {{ application.last_name }}
+                    </h3>
+                    
+                    <div class="info-grid">
+                        <!-- Personal Information -->
+                        <div class="info-section">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Personal Information</h4>
+                            <div class="info-item">
+                                <span class="info-label">Date of Birth:</span>
+                                <span class="info-value">{{ application.dob.strftime('%d %B, %Y') }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Guardian Name:</span>
+                                <span class="info-value">{{ application.guardian_name }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="info-section">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Contact Information</h4>
+                            <div class="info-item">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value">{{ application.email }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Mobile Number:</span>
+                                <span class="info-value">{{ application.mobile_number }}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Permanent Address -->
+                        <div class="info-section">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Permanent Address</h4>
+                            <div class="info-item">
+                                <span class="info-label">Address:</span>
+                                <span class="info-value">{{ application.permanent_address }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">District:</span>
+                                <span class="info-value">{{ application.permanent_district }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">State:</span>
+                                <span class="info-value">{{ application.permanent_state }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Pincode:</span>
+                                <span class="info-value">{{ application.permanent_pincode }}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Temporary Address -->
+                        <div class="info-section">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Temporary Address</h4>
+                            {% if application.is_same_as_permanent %}
+                                <div class="info-item">
+                                    <span class="info-value" style="color: var(--secondary-color);">
+                                        <i class="fas fa-check-circle"></i> Same as Permanent Address
+                                    </span>
+                                </div>
+                            {% else %}
+                                <div class="info-item">
+                                    <span class="info-label">Address:</span>
+                                    <span class="info-value">{{ application.temporary_address }}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <span class="info-label">District:</span>
+                                    <span class="info-value">{{ application.temporary_district }}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <span class="info-label">State:</span>
+                                    <span class="info-value">{{ application.temporary_state }}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <span class="info-label">Pincode:</span>
+                                    <span class="info-value">{{ application.temporary_pincode }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Other Information -->
+                        <div class="info-section">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Other Information</h4>
+                            <div class="info-item">
+                                <span class="info-label">Employment Status:</span>
+                                <span class="info-value">{{ application.employment_status }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Category:</span>
+                                <span class="info-value">{{ application.category }}</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Application Date:</span>
+                                <span class="info-value">{{ application.created_at.strftime('%d %B, %Y %H:%M') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" style="text-align: center; padding: 3rem;">
+            <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+            <p style="font-size: 1.2rem; color: var(--secondary-color);">
+                No applications found. Start your passport application process by clicking the button below.
+            </p>
+            <a href="{{ url_for('views.basic_info') }}" class="btn btn-primary" style="margin-top: 1rem;">
+                <i class="fas fa-plus"></i> New Application
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.info-section {
+    background-color: var(--card-background);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-section h4 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.info-item {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.info-value {
+    color: var(--text-color);
+}
+</style>
+{% endblock %}
