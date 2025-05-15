@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Passport Application System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url_for('views.index') }}" class="navbar-brand">
+                <i class="fas fa-passport"></i> Passport Application System
+            </a>
+        </div>
+    </nav>
+
+    <main class="container fade-in">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="container" style="text-align: center; padding: 2rem 0; color: var(--secondary-color);">
+        <p>&copy; 2024 Passport Application System. All rights reserved.</p>
+    </footer>
+</body>
+</html> 
